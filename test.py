@@ -13,7 +13,7 @@ class GetItem(object):
             # file_name = r'D:\text2{}.mp4'.format(int(time.time()))
             # rename(d['filename'], file_name)
             print('下载完成')
-        elif d['status'] =="downloading":
+        elif d['status'] == "downloading":
             print(d['fragment_count'])
 
     def download(self, youtube_url):
@@ -25,10 +25,15 @@ class GetItem(object):
         # 另存为名字
         file_name = r'D:\%(title)s_%(width)s_%(height)s.%(ext)s'
         # 开始结束日期
-        date_start = "20191117"
+        date_start = "20190901"
         date_end = str(time.strftime('%Y%m%d', time.localtime(time.time())))
+        # date_end = "20191123"
+        num = int(date_end) - int(date_start)
+        # print(num)
+        list_date = [str(int(date_start) + i) for i in range(num + 1)]
+        # print(list_date)
         # 结束列表
-        list_end = 10
+        list_end = 120
         # 定义某些下载参数
         ydl_opts = {
             # 中间件参数
@@ -43,7 +48,7 @@ class GetItem(object):
             'proxy': 'http://127.0.0.1:1081/',
             'external_downloader': "aria2c",
             'external_downloader_args': ['--min-split-size', '1M', '--max-connection-per-server', '16'],
-            'daterange': [date_start, date_end],
+            'daterange': list_date,
             'playliststart': 1,
             'playlistend': list_end
 
@@ -66,9 +71,12 @@ class GetItem(object):
         #       video_id = info_dict.get("id", None)
         #       video_title = info_dict.get('title', None)
 
+
 if __name__ == '__main__':
     # 地址
-    url_into = 'https://www.youtube.com/playlist?list=PLmuH45fzaKzaB2O0xE4JJGCj_AaFSBE0G'
+    # youtube-dl https://www.youtube.com/channel/UCStCNbOUMKtbL2sVoTJSt6w/videos
+    # https://www.youtube.com/channel/UCv6colBP34LrC9xxf0lzQag/videos    # zam
+    url_into = 'https://www.youtube.com/channel/UCv6colBP34LrC9xxf0lzQag/videos'
 
     getItem = GetItem()
     getItem.download(url_into)
