@@ -111,7 +111,7 @@ class GetItem(object):
         # 搜所有子小表, 分类处理表格
         for sheet in self.sheet_list:
             # e.g
-            if sheet.name in ['女团饭拍','8K视频']:
+            if sheet.name in ['女团饭拍','8K视频','女团专辑']:
                 print(sheet.name)
                 # 获取数据信息
                 rc_max_sheet = sheet.range(1, 1).expand().shape
@@ -152,7 +152,7 @@ class GetItem(object):
             out_format = 'bestvideo+bestaudio'
         else:
             out_format = dir_info[9]
-            print(out_format)
+            # print(out_format)
         # 合并格式
         merge_format = 'mkv'
         # 下载历史视频的设置
@@ -198,7 +198,8 @@ class GetItem(object):
             'playlistend': list_end
         }
         del ydl_opts['playlistreverse']
-        # 下载历史视频的设置
+
+       # 下载历史视频的设置
         if dir_info[3] == "是":
             # del ydl_opts['playliststart']
             # del ydl_opts['playlistend']
@@ -217,7 +218,7 @@ class GetItem(object):
             # print("start")
             num_lists = ["date", str(fan_list[6]).replace(".0", ""), dir_info[3], dir_info[4], dir_info[5]]
             # num_lists = "num"
-            print(num_lists)
+            # print(num_lists)
             playlist_dict = ydl.extract_info(fan_list[2], download=True, num_list=num_lists)
             if num_lists[3]=='否':
                 # print(playlist_dict)
@@ -228,7 +229,7 @@ if __name__ == '__main__':
     # 地址
     # youtube-dl https://www.youtube.com/channel/UCStCNbOUMKtbL2sVoTJSt6w/videos
     # https://www.youtube.com/channel/UCv6colBP34LrC9xxf0lzQag/videos    # zam
-    url_into = 'https://www.youtube.com/channel/UCv6colBP34LrC9xxf0lzQag/videos'
+    # url_into = 'https://www.youtube.com/channel/UCv6colBP34LrC9xxf0lzQag/videos'
 
     getItem = GetItem()
     # getItem.download(url_into)
